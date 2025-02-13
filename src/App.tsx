@@ -8,7 +8,7 @@ import Actualites from './pages/Actualites';
 import Contact from './pages/Contact';
 import About from './pages/About';
 import logoImage from './assets/logo.png';
-import { FontProvider } from './context/FontContext'; // Si vous l'utilisez
+
 import './App.css';
 
 const App: React.FC = () => {

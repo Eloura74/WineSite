@@ -8,18 +8,25 @@ const Menus: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-r from-[#404041] to-[#533b34]">
       {/* Section Hero */}
-      <section
-        className="relative h-[40vh] bg-cover bg-center flex items-center justify-center"
-        style={{ backgroundImage: `url(${menusImage})` }}
-      >
-        <div className="absolute inset-0 bg-black/60"></div>
-        <div className="relative text-center px-4">
-          <h1 className="text-6xl font-bold mb-4 text-[#FF4B12]">Menus & Soirées</h1>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Participez à nos soirées thématiques et découvrez des accords mets-vins savoureux dans un cadre convivial.
-          </p>
+      <div className="relative">
+        {/* Section Hero avec image de fond */}
+        <div className="relative h-[300px] overflow-hidden">
+          <img
+            src={menusImage}
+            alt="Menus et Soirées"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/50"></div>
+          <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-[#FF4B12] mb-4">
+              Menus & Soirées
+            </h1>
+            <p className="text-lg text-gray-200 max-w-2xl">
+              Participez à nos soirées thématiques et découvrez des accords mets-vins savoureux dans un cadre convivial.
+            </p>
+          </div>
         </div>
-      </section>
+      </div>
 
       {/* Contenu principal */}
       <div className="container mx-auto px-6 py-12">

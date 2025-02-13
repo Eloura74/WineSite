@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
 import { CartProvider, useCart } from './contexts/CartContext';
@@ -71,7 +71,7 @@ const Navigation = () => {
   );
 };
 
-function App() {
+const App = () => {
   return (
     <CartProvider>
       <Router>
@@ -93,6 +93,6 @@ function App() {
       </Router>
     </CartProvider>
   );
-}
+};
 
 export default App;

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
+import { HiMenu, HiX } from 'react-icons/hi';
 import { CartProvider, useCart } from './contexts/CartContext';
 
 // Pages
@@ -15,7 +16,17 @@ import Pannier from './componants/Pannier';
 // Composant de navigation avec le panier
 const Navigation = () => {
   const [isPanierOpen, setIsPanierOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { getItemCount } = useCart();
+
+  const navigationLinks = [
+    { path: '/', label: 'Accueil' },
+    { path: '/about', label: 'À propos' },
+    { path: '/boutique', label: 'Boutique' },
+    { path: '/menus', label: 'Menus' },
+    { path: '/abonnement', label: 'Abonnement' },
+    { path: '/contact', label: 'Contact' },
+  ];
 
   return (
     <>
@@ -27,41 +38,58 @@ const Navigation = () => {
               L'Aperotec
             </Link>
 
-            {/* Navigation Links */}
+            {/* Navigation Links - Desktop */}
             <div className="hidden md:flex space-x-8">
-              <Link to="/" className="text-gray-300 hover:text-[#FF4B12] transition-colors">
-                Accueil
-              </Link>
-              <Link to="/about" className="text-gray-300 hover:text-[#FF4B12] transition-colors">
-                À propos
-              </Link>
-              <Link to="/boutique" className="text-gray-300 hover:text-[#FF4B12] transition-colors">
-                Boutique
-              </Link>
-              <Link to="/menus" className="text-gray-300 hover:text-[#FF4B12] transition-colors">
-                Menus
-              </Link>
-              <Link to="/abonnement" className="text-gray-300 hover:text-[#FF4B12] transition-colors">
-                Abonnement
-              </Link>
-              <Link to="/contact" className="text-gray-300 hover:text-[#FF4B12] transition-colors">
-                Contact
-              </Link>
+              {navigationLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className="text-gray-300 hover:text-[#FF4B12] transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ))}
             </div>
 
-            {/* Panier */}
-            <button
-              onClick={() => setIsPanierOpen(true)}
-              className="relative p-2 text-gray-300 hover:text-[#FF4B12] transition-colors"
-            >
-              <FaShoppingCart size={24} />
-              {getItemCount() > 0 && (
-                <span className="absolute -top-1 -right-1 bg-[#FF4B12] text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                  {getItemCount()}
-                </span>
-              )}
-            </button>
+            <div className="flex items-center space-x-4">
+              {/* Panier */}
+              <button
+                onClick={() => setIsPanierOpen(true)}
+                className="relative p-2 text-gray-300 hover:text-[#FF4B12] transition-colors"
+              >
+                <FaShoppingCart size={24} />
+                {getItemCount() > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-[#FF4B12] text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                    {getItemCount()}
+                  </span>
+                )}
+              </button>
+
+              {/* Menu Burger - Mobile */}
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="md:hidden p-2 text-gray-300 hover:text-[#FF4B12] transition-colors"
+              >
+                {isMobileMenuOpen ? <HiX size={24} /> : <HiMenu size={24} />}
+              </button>
+            </div>
           </div>
+
+          {/* Menu Mobile */}
+          {isMobileMenuOpen && (
+            <div className="md:hidden py-4">
+              {navigationLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className="block py-2 px-4 text-gray-300 hover:text-[#FF4B12] transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       </nav>
 
